@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+    <div style="margin-top: 300px">
+    <section id="main" class="container">
+					<section class="box special features">
+						<div class="features-row">
+							<section>
+								<img alt="" {% if user_id == None or user.photo is not defined %} src="/media/user/Screenshot_1.png" {% else %} src="/media/{{ user_id }}"{% endif %} style="max-height: 250px; max-width: 250px">
+								<h3>{{ user.username }}</h3>
+								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+							</section>
+							<section>
+
+								<h3>Описание</h3>
+                                <p>{% if user.description is not None %} {{ user.description }} {% else %} Обычный обыватель интернета {% endif %}</p>
+                            </section>
+						</div>
+					</section>
+                    <div>
+                        <h1>Последние комментарии</h1>
+                        {% if comment is not defined %}
+                            <table>
+                                {% for comment in comment.all %}
+                                        <ul><a href="{{ comment.post_news.get_absolute_url }}" style="position: center">{{ comment.post_news }}</a></ul>
+                                        <ul><img src="/media/{{ comment.post_news.images.all.0.image }}" style="max-width: 250px; max-height: 250px"></ul>
+                                        <ul>{{ comment }}</ul>
+                                {% endfor %}
+                            </table>
+                        {% else %}
+                            <h1>Комментариев нет, станьте первым!</h1>
+                        {% endif %}
+                    </div>
+    </section>
+    </div>
+{% endblock %}

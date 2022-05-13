@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+			<!-- Main -->
+    {% for game in last_news %}
+				<section id="main" class="container">
+					<div class="box">
+                        {% if game.images.all.0 %}
+                            <a href="{{ game.get_absolute_url }}">
+                                <span class="image featured"><img src="/media/{{ game.images.all.0.image }}" alt="" /></span>
+                            </a>
+                        {% else %}
+                            <a href="{{ game.get_absolute_url }}">
+                                <span class="image featured"><img src="/media/media/if_no_photo.jpg" alt="" /></span>
+                            </a>
+                        {% endif %}
+                            <h3 style="margin-top: 80px;">{{ game.game_names }}<a href="{{ game.get_absolute_url }}"></a></h3>
+                            <p>{{ game.mini_description }}<a href="{{ game.get_absolute_url }}"></a></p>
+						</div>
+				</section>
+    {% endfor %}
+{% endblock %}
